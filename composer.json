@@ -1,0 +1,12 @@
+{
+    "name": "try-again-later/json-placeholder-facade",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "TryAgainLater\\JsonPlaceholderFacade\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
