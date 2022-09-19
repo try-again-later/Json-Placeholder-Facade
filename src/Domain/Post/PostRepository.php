@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace TryAgainLater\JsonPlaceholderFacade\Domain\Post;
 
-use TryAgainLater\JsonPlaceholderFacade\Domain\User\User;
-
 interface PostRepository
 {
     /**
      * @return Post[]
      */
-    public function findAllByAuthor(User $author): array;
+    public function findAllByAuthorId(int $authorId): array;
 
     /**
      * @throws PostNotFoundException

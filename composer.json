@@ -6,6 +6,9 @@
             "TryAgainLater\\JsonPlaceholderFacade\\": "src/"
         }
     },
+    "scripts": {
+        "example": "php ./example/example.php"
+    },
     "require": {
         "guzzlehttp/guzzle": "^7.0",
         "php": "^7.4",

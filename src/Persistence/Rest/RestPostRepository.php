@@ -42,15 +42,20 @@ class RestPostRepository implements PostRepository
      * @return Post[]
      * @throws GuzzleException
      */
-    public function findAllByAuthor(User $author): array
+    public function findAllByAuthorId(int $authorId): array
     {
         $response = $this->guzzleClient->request(
             'GET',
             'posts',
-            ['query' => [self::AUTHOR_ID_KEY => $author->getId()]]
+            ['query' => [self::AUTHOR_ID_KEY => $authorId]]
         );
         $postsData = json_decode($response->getBody()->getContents(), true) ?? [];
         $posts = [];
+
+        $author = null;
+        if ($this->userRepository !== null) {
+            $author = $this->userRepository->findWithId($authorId);
+        }
 
         foreach ($postsData as $postData) {
             $posts[] = self::parsePostFromArray($postData, $author);
