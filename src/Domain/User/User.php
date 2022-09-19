@@ -15,7 +15,7 @@ class User
         string $name,
         string $username,
         string $email,
-        ?int $id = null
+        ?int   $id = null
     )
     {
         $this->name = $name;

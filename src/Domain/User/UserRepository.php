@@ -11,9 +11,18 @@ interface UserRepository
      */
     public function findAll(): array;
 
+    /**
+     * @throws UserNotFoundException
+     */
     public function findWithId(int $id): User;
 
+    /**
+     * @throws UserNotFoundException
+     */
     public function findWithUsername(string $username): User;
 
+    /**
+     * @throws UserNotFoundException
+     */
     public function findWithEmail(string $email): User;
 }
