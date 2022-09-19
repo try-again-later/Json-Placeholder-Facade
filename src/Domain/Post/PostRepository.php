@@ -18,12 +18,12 @@ interface PostRepository
      */
     public function findWithId(int $id): Post;
 
-    public function create(Post $post): void;
+    public function create(Post $post): Post;
 
     /**
      * @throws PostNotFoundException
      */
-    public function update(Post $post): void;
+    public function update(Post $post): Post;
 
     /**
      * @throws PostNotFoundException
