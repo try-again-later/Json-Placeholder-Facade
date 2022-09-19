@@ -13,6 +13,11 @@ interface PostRepository
      */
     public function findAllByAuthor(User $author): array;
 
+    /**
+     * @throws PostNotFoundException
+     */
+    public function findWithId(int $id): Post;
+
     public function create(Post $post): void;
 
     /**

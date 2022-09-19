@@ -4,23 +4,26 @@ declare(strict_types=1);
 
 namespace TryAgainLater\JsonPlaceholderFacade\Domain\Post;
 
-use TryAgainLater\JsonPlaceholderFacade\Domain\User\User;
+use TryAgainLater\JsonPlaceholderFacade\Domain\User\{User, UserRepository, UserNotFoundException};
 
 class Post
 {
     private ?int $id;
-    private User $author;
+    private ?User $author;
+    private int $authorId;
     private string $title;
     private string $body;
 
     public function __construct(
-        User   $author,
         string $title,
         string $body,
+        int    $authorId,
+        ?User  $author = null,
         ?int   $id = null
     )
     {
         $this->author = $author;
+        $this->authorId = $authorId;
         $this->title = $title;
         $this->body = $body;
         $this->id = $id;
@@ -36,9 +39,23 @@ class Post
         $this->id = $id;
     }
 
-    public function getAuthor(): User
+    /**
+     * @throws UserNotFoundException
+     */
+    public function getAuthor(?UserRepository $userRepository = null): ?User
     {
+        if ($this->author === null && $userRepository === null) {
+            return null;
+        }
+        if ($this->author === null) {
+            $this->author = $userRepository->findWithId($this->authorId);
+        }
         return $this->author;
+    }
+
+    public function getAuthorId(): int
+    {
+        return $this->authorId;
     }
 
     public function getTitle(): string
@@ -49,5 +66,10 @@ class Post
     public function getBody(): string
     {
         return $this->body;
+    }
+
+    public static function builder(): PostBuilder
+    {
+        return new PostBuilder();
     }
 }
