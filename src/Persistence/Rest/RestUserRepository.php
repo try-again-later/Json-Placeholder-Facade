@@ -30,6 +30,10 @@ class RestUserRepository implements UserRepository
         $this->guzzleClient = $guzzleClient;
     }
 
+    /**
+     * @return User[]
+     * @throws GuzzleException
+     */
     public function findAll(): array
     {
         $response = $this->guzzleClient->request('GET', 'users');
